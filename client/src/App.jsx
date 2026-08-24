@@ -4,6 +4,8 @@ import Register from "./pages/Auth/Register";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import VerifyEmail from "./pages/Auth/VerifyEmail";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import WorkSpace from "./pages/workspace/WorkSpace";
+import Editor from "./pages/editor/Editor";
 
 function App() {
   return (
@@ -22,9 +24,10 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
 
         <Route
-          path="/workspaces"
-          element={<div>Workspace Page</div>}
+          path="/workspace"
+          element={<WorkSpace/>}
         />
+        <Route path="/editor" element={<Editor />} />
       </Routes>
     </BrowserRouter>
   );
