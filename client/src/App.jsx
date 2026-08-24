@@ -3,6 +3,7 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import VerifyEmail from "./pages/Auth/VerifyEmail";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -18,10 +19,7 @@ function App() {
 
         <Route path="/verify-email" element={<VerifyEmail />}  />
 
-        <Route
-          path="/dashboard"
-          element={<div>Dashboard Page</div>}
-        />
+        <Route path="/dashboard" element={<Dashboard />} />
 
         <Route
           path="/workspaces"
