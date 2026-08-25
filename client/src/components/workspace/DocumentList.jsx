@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "../common/Button";
 import Modal from "../common/Modal";
+import ShareModal from "./ShareModal";
 
 const DocumentList = () => {
   const [documents, setDocuments] = useState([
@@ -12,6 +13,7 @@ const DocumentList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [documentTitle, setDocumentTitle] = useState("");
   const [editingDocument, setEditingDocument] = useState(null);
+  const [sharingDocument, setSharingDocument] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -107,6 +109,13 @@ const DocumentList = () => {
                 Open
               </Button>
 
+              <Button
+              variant="secondary"
+              onClick={() => setSharingDocument(document)}
+              >
+                Share
+              </Button>
+
               <button
                 type="button"
                 className="text-xl text-slate-400 hover:text-slate-700"
@@ -179,6 +188,11 @@ const DocumentList = () => {
           </div>
         </form>
       </Modal>
+      <ShareModal
+        isOpen={Boolean(sharingDocument)}
+        onClose={() => setSharingDocument(null)}
+        documentName={sharingDocument?.title}
+      />
     </div>
   );
 };
