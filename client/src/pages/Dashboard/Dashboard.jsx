@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import {
   Clock3,
   FileText,
@@ -41,21 +43,25 @@ const stats = [
     label: "My Documents",
     value: "12",
     icon: FileText,
+    path: "/documents",
   },
   {
     label: "Shared with Me",
     value: "8",
     icon: Users,
+    path: "/shared",
   },
   {
     label: "Favorites",
     value: "5",
     icon: Star,
+    path: "/favorites",
   },
   {
     label: "Workspaces",
     value: "3",
     icon: Folder,
+    path: "/workspace",
   },
 ];
 
@@ -92,9 +98,10 @@ function Dashboard() {
             const Icon = stat.icon;
 
             return (
-              <div
-                key={stat.label}
-                className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-sm"
+              <Link 
+              key={stat.label}
+              to={stat.path}
+              className="block rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-md"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-[#4F46E5]">
@@ -109,7 +116,7 @@ function Dashboard() {
                 <p className="mt-4 text-sm text-slate-500">
                   {stat.label}
                 </p>
-              </div>
+              </Link>
             );
           })}
         </div>
