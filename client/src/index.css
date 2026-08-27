@@ -42,3 +42,75 @@ a {
   color: inherit;
   text-decoration: none;
 }
+/* Rich Text Editor */
+
+.tiptap {
+  outline: none;
+}
+
+.tiptap table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+  overflow: hidden;
+  table-layout: fixed;
+}
+
+.tiptap table td,
+.tiptap table th {
+  border: 1px solid #cbd5e1;
+  min-width: 100px;
+  padding: 8px 10px;
+  vertical-align: top;
+  position: relative;
+}
+
+.tiptap table th {
+  background-color: #f1f5f9;
+  font-weight: 600;
+}
+
+.tiptap table td {
+  background-color: white;
+}
+
+.tiptap table p {
+  margin: 0;
+}.tiptap h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 1rem 0;
+}
+
+.tiptap h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0.8rem 0;
+}
+
+.tiptap h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0.6rem 0;
+}
+
+.tiptap p {
+  margin: 0.5rem 0;
+}
+.tiptap ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.tiptap ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+}
+
+.tiptap li {
+  margin: 0.25rem 0;
+}
+
+.tiptap li p {
+  margin: 0;
+}

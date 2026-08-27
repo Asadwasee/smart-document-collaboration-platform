@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "../common/Button";
 import Modal from "../common/Modal";
+import { Folder,  MoreVertical } from "lucide-react";
 
 const FolderList = () => {
   const [folders, setFolders] = useState([
@@ -87,11 +88,15 @@ const FolderList = () => {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {folders.map((folder) => (
           <div
-            key={folder.id}
-            className="flex items-center justify-between rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-sm"
-          >
+  key={folder.id}
+  className="group flex items-center justify-between rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-md"
+>
             <div className="flex items-center gap-3">
-              <span className="text-2xl">📁</span>
+              <Folder
+  size={22}
+  strokeWidth={1.8}
+  className="text-indigo-600"
+/>
 
               <span className="font-medium text-[#1E293B]">
                 {folder.name}
@@ -116,7 +121,7 @@ const FolderList = () => {
                   }
                 }}
               >
-                ⋮
+                <MoreVertical size={18} />
               </button>
             </div>
           </div>

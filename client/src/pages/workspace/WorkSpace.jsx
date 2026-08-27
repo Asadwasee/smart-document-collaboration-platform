@@ -4,7 +4,7 @@ import Button from "../../components/common/Button";
 import FolderList from "../../components/workspace/FolderList";
 import DocumentList from "../../components/workspace/DocumentList";
 import WorkspaceCard from "../../components/workspace/WorkspaceCard";
-
+import { Folder } from "lucide-react";
 const WorkSpace = () => {
   // ================= WORKSPACES =================
 
@@ -174,9 +174,9 @@ const WorkSpace = () => {
 
               <div className="flex items-center gap-3">
 
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 text-xl text-white shadow-sm">
-                  📁
-                </div>
+               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-sm">
+  <Folder size={22} strokeWidth={2} />
+</div>
 
                 <div>
                   <h1 className="text-2xl font-bold tracking-tight text-slate-900">
@@ -260,7 +260,7 @@ const WorkSpace = () => {
             <div className="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center">
 
               <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-2xl">
-                📁
+                <Folder size={22} strokeWidth={2}/>
               </div>
 
               <h3 className="mt-4 text-lg font-semibold text-slate-900">

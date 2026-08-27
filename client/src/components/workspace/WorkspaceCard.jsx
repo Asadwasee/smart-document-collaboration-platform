@@ -1,5 +1,10 @@
 import { useState } from "react";
 import Button from "../common/Button";
+import {
+  Folder,
+  MoreVertical,
+  ArrowRight,
+} from "lucide-react";
 
 const WorkspaceCard = ({ workspace, onRename, onDelete }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,9 +25,9 @@ const WorkspaceCard = ({ workspace, onRename, onDelete }) => {
       {/* Header */}
       <div className="flex items-start justify-between">
 
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-xl">
-          📁
-        </div>
+       <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+  <Folder size={24} strokeWidth={1.8} />
+</div>
 
         {/* Menu */}
         <div className="relative">
@@ -32,7 +37,7 @@ const WorkspaceCard = ({ workspace, onRename, onDelete }) => {
             onClick={() => setMenuOpen(!menuOpen)}
             className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
           >
-            ⋮
+            <MoreVertical size={18} />
           </button>
 
           {menuOpen && (
@@ -172,7 +177,7 @@ const WorkspaceCard = ({ workspace, onRename, onDelete }) => {
           }
         >
           Open workspace
-          <span>→</span>
+          <ArrowRight size={16} />
         </Button>
 
       </div>
