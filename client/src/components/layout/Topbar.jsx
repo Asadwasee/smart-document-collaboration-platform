@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { Bell, Menu, Search, User } from "lucide-react";
+import { Bell, Menu, User } from "lucide-react";
+import SearchBar from "../common/SearchBar";
 import { useNavigate } from "react-router-dom";
 
 function Topbar({ onMenuClick }) {
-  const navigate = useNavigate();
 
     const [showNotifications, setShowNotifications] = useState(false);
 
   return (
     <header className="flex h-16 items-center justify-between border-b border-[#E2E8F0] bg-white px-4 sm:px-6">
-      <div className="flex items-center gap-3">
+      <div className="flex min-w-0 flex-1 items-center gap-3">
         {/* Mobile menu */}
         <button
           type="button"
@@ -21,22 +21,10 @@ function Topbar({ onMenuClick }) {
         </button>
 
         {/* Search */}
-        <button
-          type="button"
-          onClick={() => navigate("/search")}
-          className="hidden w-72 items-center gap-2 rounded-lg border border-[#E2E8F0] bg-slate-50 px-3 py-2 text-left text-sm text-slate-400 transition hover:border-slate-300 sm:flex"
-        >
-          <Search size={17} />
-
-          <span>Search documents...</span>
-
-          <span className="ml-auto rounded border border-slate-200 bg-white px-1.5 py-0.5 text-xs text-slate-400">
-            /
-          </span>
-        </button>
+        <SearchBar />
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="ml-4 flex shrink-0 items-center gap-2">
         {/* Notifications */}
         <button
           type="button"

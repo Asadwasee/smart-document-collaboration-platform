@@ -17,6 +17,7 @@ const DocumentList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [documentTitle, setDocumentTitle] = useState("");
   const [editingDocument, setEditingDocument] = useState(null);
+  const [sharingDocument, setSharingDocument] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
