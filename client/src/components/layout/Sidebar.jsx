@@ -3,7 +3,6 @@ import {
   FileText,
   Folder,
   Home,
-  Search,
   Settings,
   Star,
   Users,
@@ -33,7 +32,7 @@ const navigationItems = [
   },
   {
     label: "Workspaces",
-    path: "/workspaces",
+    path: "/workspace",
     icon: Folder,
   },
 ];
@@ -105,14 +104,7 @@ function Sidebar({ isOpen, onClose }) {
 
           <div className="my-4 border-t border-[#E2E8F0]" />
 
-          <Link
-            to="/search"
-            onClick={onClose}
-            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-[#1E293B]"
-          >
-            <Search size={19} />
-            Search
-          </Link>
+          
         </nav>
 
         {/* Settings */}

@@ -6,6 +6,9 @@ import VerifyEmail from "./pages/Auth/VerifyEmail";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import WorkSpace from "./pages/workspace/WorkSpace";
 import Editor from "./pages/editor/Editor";
+import Documents from "./pages/Documents/Documents";
+import Shared from "./pages/Shared/Shared";
+import Favorites from "./pages/Favorites/Favorites";
 
 function App() {
   return (
@@ -28,6 +31,10 @@ function App() {
           element={<WorkSpace/>}
         />
         <Route path="/editor" element={<Editor />} />
+
+        <Route path="/documents" element={<Documents />} />
+        <Route path="/shared" element={<Shared />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </BrowserRouter>
   );
