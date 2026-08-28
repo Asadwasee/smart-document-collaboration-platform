@@ -23,3 +23,4 @@ export const requireAuth = async (req, res, next) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
 };
+export const protect = requireAuth;
