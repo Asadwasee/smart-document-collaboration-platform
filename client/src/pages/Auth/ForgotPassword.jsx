@@ -3,13 +3,15 @@ import { Link } from "react-router-dom";
 import AuthLayout from "../../components/layout/AuthLayout";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
+import api from "../../api/api";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!email.trim()) {
@@ -17,10 +19,23 @@ function ForgotPassword() {
       return;
     }
 
-    setError("");
-    setSubmitted(true);
+    try {
+      setLoading(true);
+      setError("");
 
-    console.log("Forgot password request:", email);
+      await api.post("/auth/forgot-password", {
+        email: email.trim(),
+      });
+
+      setSubmitted(true);
+    } catch (error) {
+      setError(
+        error.response?.data?.message ||
+          "Unable to send password reset instructions."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -70,7 +85,7 @@ function ForgotPassword() {
           required
         />
 
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" loading={loading}>
           Send reset link
         </Button>
       </form>

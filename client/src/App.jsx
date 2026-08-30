@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
@@ -9,9 +10,11 @@ import Editor from "./pages/editor/Editor";
 import Documents from "./pages/Documents/Documents";
 import Shared from "./pages/Shared/Shared";
 import Favorites from "./pages/Favorites/Favorites";
+import ResetPassword from "./pages/Auth/ResetPassword";
 
 function App() {
   return (
+    <AuthProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
@@ -23,6 +26,8 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
 
         <Route path="/verify-email" element={<VerifyEmail />}  />
+
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         <Route path="/dashboard" element={<Dashboard />} />
 
@@ -37,6 +42,7 @@ function App() {
         <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   );
 }
 

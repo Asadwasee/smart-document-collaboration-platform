@@ -52,15 +52,19 @@ const workspaceSchema = new mongoose.Schema(
 workspaceSchema.index({ owner: 1, createdAt: -1 });
 workspaceSchema.index({ "members.user": 1, createdAt: -1 });
 
-workspaceSchema.pre("validate", function ensureUniqueMembers(next) {
-  const memberIds = this.members.map((entry) => entry.user.toString());
+workspaceSchema.pre("validate", function ensureUniqueMembers() {
+  const memberIds = this.members.map((entry) =>
+    entry.user.toString()
+  );
+
   const uniqueCount = new Set(memberIds).size;
 
   if (uniqueCount !== memberIds.length) {
-    this.invalidate("members", "Duplicate workspace members are not allowed.");
+    this.invalidate(
+      "members",
+      "Duplicate workspace members are not allowed."
+    );
   }
-
-  next();
 });
 
 export const Workspace = mongoose.model("Workspace", workspaceSchema);

@@ -33,10 +33,33 @@ export const getWorkspaces = async (req, res, next) => {
     const userId = req.user.id;
 
     const workspaces = await Workspace.find({
-      $or: [{ owner: userId }, { "members.user": userId }],
-    }).sort({ createdAt: -1 });
+      $or: [
+        { owner: userId },
+        { "members.user": userId },
+      ],
+    })
+      .populate("owner", "name email")
+      .populate("members.user", "name email")
+      .sort({ createdAt: -1 })
+      .lean();
 
-    return res.json({ workspaces });
+    const workspacesWithCounts = await Promise.all(
+      workspaces.map(async (workspace) => {
+        const documentCount =
+          await Document.countDocuments({
+            workspace: workspace._id,
+          });
+
+        return {
+          ...workspace,
+          documentCount,
+        };
+      })
+    );
+
+    return res.json({
+      workspaces: workspacesWithCounts,
+    });
   } catch (error) {
     next(error);
   }

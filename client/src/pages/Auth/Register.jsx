@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import AuthLayout from "../../components/layout/AuthLayout";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -12,55 +13,83 @@ function Register() {
     confirmPassword: "",
   });
 
+  const navigate = useNavigate();
+const { register } = useAuth();
+
+const [loading, setLoading] = useState(false);
+const [serverError, setServerError] = useState("");
+
   const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+  const { name, value } = event.target;
 
-    setFormData((previous) => ({
-      ...previous,
-      [name]: value,
-    }));
+  setFormData((previous) => ({
+    ...previous,
+    [name]: value,
+  }));
 
-    setErrors((previous) => ({
-      ...previous,
-      [name]: "",
-    }));
-  };
+  setErrors((previous) => ({
+    ...previous,
+    [name]: "",
+  }));
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  setServerError("");
+};
 
-    const newErrors = {};
+  const handleSubmit = async (event) => {
+  event.preventDefault();
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required.";
-    }
+  const newErrors = {};
 
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required.";
-    }
+  if (!formData.name.trim()) {
+    newErrors.name = "Name is required.";
+  }
 
-    if (!formData.password) {
-      newErrors.password = "Password is required.";
-    } else if (formData.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters.";
-    }
+  if (!formData.email.trim()) {
+    newErrors.email = "Email is required.";
+  }
 
-    if (!formData.confirmPassword) {
-      newErrors.confirmPassword = "Please confirm your password.";
-    } else if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match.";
-    }
+  if (!formData.password) {
+    newErrors.password = "Password is required.";
+  } else if (formData.password.length < 8) {
+    newErrors.password = "Password must be at least 8 characters.";
+  }
 
-    setErrors(newErrors);
+  if (!formData.confirmPassword) {
+    newErrors.confirmPassword = "Please confirm your password.";
+  } else if (formData.password !== formData.confirmPassword) {
+    newErrors.confirmPassword = "Passwords do not match.";
+  }
 
-    if (Object.keys(newErrors).length > 0) {
-      return;
-    }
+  setErrors(newErrors);
 
-    console.log("Register form:", formData);
-  };
+  if (Object.keys(newErrors).length > 0) {
+    return;
+  }
+
+  try {
+    setLoading(true);
+    setServerError("");
+
+    await register(
+      formData.name,
+      formData.email,
+      formData.password
+    );
+
+    navigate(
+      `/verify-email?email=${encodeURIComponent(formData.email)}`
+    );
+  } catch (error) {
+    setServerError(
+      error.response?.data?.message ||
+        "Registration failed. Please try again."
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <AuthLayout
@@ -111,7 +140,14 @@ function Register() {
           required
         />
 
-        <Button type="submit" className="w-full">
+        {serverError && (
+  <p className="rounded-lg bg-red-50 p-3 text-sm text-red-600">
+    {serverError}
+  </p>
+)}
+
+        <Button type="submit" className="w-full"
+        loading={loading}>
           Create account
         </Button>
       </form>

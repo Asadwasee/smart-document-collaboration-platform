@@ -1,16 +1,22 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthLayout from "../../components/layout/AuthLayout";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
+import { useAuth } from "../../context/AuthContext";
 
 function Login() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState("");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -24,9 +30,11 @@ function Login() {
       ...previous,
       [name]: "",
     }));
+
+    setServerError("");
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const newErrors = {};
@@ -45,7 +53,21 @@ function Login() {
       return;
     }
 
-    console.log("Login form:", formData);
+    try {
+      setLoading(true);
+      setServerError("");
+
+      await login(formData.email, formData.password);
+
+      navigate("/dashboard");
+    } catch (error) {
+      setServerError(
+        error.response?.data?.message ||
+          "Login failed. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -87,7 +109,17 @@ function Login() {
           </div>
         </div>
 
-        <Button type="submit" className="w-full">
+        {serverError && (
+          <p className="rounded-lg bg-red-50 p-3 text-sm text-red-600">
+            {serverError}
+          </p>
+        )}
+
+        <Button
+          type="submit"
+          className="w-full"
+          loading={loading}
+        >
           Login
         </Button>
       </form>
@@ -106,3 +138,4 @@ function Login() {
 }
 
 export default Login;
+

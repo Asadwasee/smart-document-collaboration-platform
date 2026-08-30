@@ -51,11 +51,19 @@ export const createDocument = async (req, res, next) => {
       owner: req.user.id,
     });
 
-    await createDocumentSnapshot({
-      document,
-      changedBy: req.user.id,
-      changeType: "create",
-    });
+    console.log("Document before snapshot:", {
+  id: document._id,
+  title: document.title,
+  content: document.content,
+  workspace: document.workspace,
+  folder: document.folder,
+});
+
+await createDocumentSnapshot({
+  document,
+  changedBy: req.user.id,
+  changeType: "create",
+});
 
     return res.status(201).json({ document });
   } catch (error) {

@@ -1,7 +1,9 @@
 import { DocumentVersion } from "../models/DocumentVersion.js";
 
 const nextVersionNumber = async (documentId) => {
-  const latest = await DocumentVersion.findOne({ document: documentId })
+  const latest = await DocumentVersion.findOne({
+    document: documentId,
+  })
     .select("versionNumber")
     .sort({ versionNumber: -1 })
     .lean();
@@ -24,9 +26,12 @@ export const createDocumentSnapshot = async ({
     changeType,
     changedBy,
     sourceVersion,
+
     snapshot: {
-      title: document.title,
-      content: document.content,
+      title: document.title || "",
+      content: typeof document.content === "string"
+        ? document.content
+        : "",
       folder: document.folder || null,
     },
   });
