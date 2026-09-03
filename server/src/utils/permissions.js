@@ -16,6 +16,7 @@ export const PermissionActions = {
   FOLDER_DELETE: "folder:delete",
   DOCUMENT_CREATE: "document:create",
   DOCUMENT_READ: "document:read",
+  DOCUMENT_COMMENT: "document:comment",
   DOCUMENT_UPDATE: "document:update",
   DOCUMENT_DELETE: "document:delete",
 };
@@ -26,12 +27,15 @@ const baseReadActions = [
   PermissionActions.DOCUMENT_READ,
 ];
 
+const commenterActions = [...baseReadActions, PermissionActions.DOCUMENT_COMMENT];
+
 const editorActions = [
   ...baseReadActions,
   PermissionActions.FOLDER_CREATE,
   PermissionActions.FOLDER_UPDATE,
   PermissionActions.FOLDER_DELETE,
   PermissionActions.DOCUMENT_CREATE,
+  PermissionActions.DOCUMENT_COMMENT,
   PermissionActions.DOCUMENT_UPDATE,
   PermissionActions.DOCUMENT_DELETE,
 ];
@@ -39,7 +43,7 @@ const editorActions = [
 const rolePermissions = {
   [WorkspaceRoles.OWNER]: new Set(Object.values(PermissionActions)),
   [WorkspaceRoles.EDITOR]: new Set(editorActions),
-  [WorkspaceRoles.COMMENTER]: new Set(baseReadActions),
+  [WorkspaceRoles.COMMENTER]: new Set(commenterActions),
   [WorkspaceRoles.VIEWER]: new Set(baseReadActions),
 };
 

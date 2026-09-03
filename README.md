@@ -2,30 +2,15 @@
 
 A modern, real-time web-based document collaboration platform built with the MERN stack. It seamlessly combines document collaboration, folder/workspace management, version control, granular permissions, and intelligent search into a single unified workspace.
 
----
 
 ## Table of Contents
-- [Project Overview](#-project-overview)
-- [Key Features](#-key-features)
-- [Tech Stack](#-tech-stack)
-- [Project Folder Structure](#-project-folder-structure)
-- [Getting Started](#-getting-started)
-- [Environment Variables](#-environment-variables)
-- [Team & Task Division](#-team--task-division)
-- [GitHub Workflow & Rules](#-github-workflow--rules)
 
----
 
 ## Project Overview
 The **Smart Document Collaboration Platform** allows users to create, edit, share, and manage documents in real-time. Think of it as a lightweight hybrid of Google Docs and Notion.
 
 ### Key Highlights:
-- **Real-Time Collaboration:** Simultaneous multi-user editing with live cursors and active user indicators.
-- **Rich Text Editing:** Full rich-text support including formatting, code blocks, tables, and images.
-- **Granular Permissions:** Workspace and document-level role-based access control (Owner, Editor, Commenter, Viewer).
-- **Version Control:** Complete revision history with snapshot restore capabilities.
 
----
 
 ## Key Features
 1. **Authentication & Authorization:** JWT-based signup, login, password recovery, email verification, and session management.
@@ -38,7 +23,6 @@ The **Smart Document Collaboration Platform** allows users to create, edit, shar
 8. **Notifications:** Real-time alert panel for mentions, document shares, and comments.
 9. **File Management:** Cloud-backed file uploads (PDF, DOCX, Images) with rename/delete/move functionalities.
 
----
 
 ## Tech Stack
 
@@ -51,7 +35,6 @@ The **Smart Document Collaboration Platform** allows users to create, edit, shar
 | **File Storage** | Cloudinary / AWS S3 |
 | **Authentication** | JSON Web Tokens (JWT) & Bcrypt.js |
 
----
 
 ## Project Folder Structure
 
@@ -112,3 +95,28 @@ smart-document-collaboration-platform/
 │
 ├── .gitignore                     # Git ignored files (.env, node_modules)
 └── README.md                      # Project documentation
+
+## Getting Started
+
+Install dependencies and start the backend:
+
+```bash
+cd server
+npm install
+copy .env.example .env
+npm run dev
+```
+
+In another terminal, start the frontend:
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+### Environment variables
+
+The backend loads variables from `server/.env`. Set `MONGO_URI` to either a local MongoDB URI or a MongoDB Atlas URI. The application reads `MONGO_URI`; it does not use separate `MONGODB_USERNAME` and `MONGODB_PASSWORD` variables.
+
+Do not commit or share `server/.env`. Share `server/.env.example` instead. Each partner must provide their own MongoDB credential in their local `.env`, or receive a shared database credential through a private channel. A password-free Atlas URI cannot authenticate to MongoDB.
